@@ -1,4 +1,4 @@
-SOURCES = conversion.c debug.c memory.c main.c project1.c
+SOURCES = conversion.c debug.c memory.c main.c project2.c circularBuffer.c uart.c
 OBJS = $(SOURCES:.c=.o)
 IMP = $(SOURCES:.c=.i)
 INCLUDES = 
