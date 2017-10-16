@@ -1,4 +1,4 @@
-SOURCES = conversion.c debug.c memory.c main.c project2.c circularBuffer.c uart.c
+SOURCES = conversion.c debug.c memory.c main.c project2.c circbuff.c uart.c
 OBJS = $(SOURCES:.c=.o)
 IMP = $(SOURCES:.c=.i)
 INCLUDES = 
@@ -53,4 +53,4 @@ build: $(OBJS)
 
 .PHONY: clean
 clean:
-	-rm *.i *.o *.map *.d project1.elf a.out
+	-rm *.i *.o *.map *.d project1.elf
