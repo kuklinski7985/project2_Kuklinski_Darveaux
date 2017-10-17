@@ -12,7 +12,11 @@
 #include "circbuff.h"
 
 
-CB_status CB_buffer_add_item(CB_t * buff, uint32_t data);
+CB_status CB_buffer_add_item(CB_t * buff, uint32_t data){
+
+  
+  return 0;
+};
 
 CB_status CB_buffer_remove_item(CB_t * buff, uint32_t removedData);
 
@@ -24,9 +28,13 @@ CB_status CB_peek(CB_t * buff, uint32_t buffValue);
 
 CB_status CB_init(CB_t * buff, uint32_t length){
 
-  buff = (CB_t *) malloc((sizeof(size_t)*length));
+  buff->circbuff  = (uint32_t*)malloc((sizeof(size_t))*length);
+  buff->headptr = buff->tailptr = buff->circbuff;
 
-  if (buff == NULL)
+  buff->buffLength = length;   //setting the length of the buffer
+  buff->count = 0;             //set current item count of buffer to zero
+  
+  if (buff->headptr == NULL)
   {
     return null_error;
   }
@@ -35,4 +43,14 @@ CB_status CB_init(CB_t * buff, uint32_t length){
   }
 };
 
-CB_status CB_destroy(CB_t * buff);
+CB_status CB_destroy(CB_t * buff){
+  if(buff != NULL)
+  {
+    free(buff);
+    return no_error;
+  }
+  else
+  {
+    return null_error;
+  }
+};
