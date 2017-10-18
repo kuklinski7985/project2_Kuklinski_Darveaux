@@ -1,11 +1,12 @@
-SOURCES = conversion.c debug.c memory.c main.c project2.c circbuff.c uart.c
+#SOURCES = conversion.c debug.c memory.c main.c project2.c circbuff.c uart.c
+SOURCES = main.c project2.c circbuff.c uart.c
 OBJS = $(SOURCES:.c=.o)
 IMP = $(SOURCES:.c=.i)
 INCLUDES = 
 CC = gcc
 DEBUG = -g -Wall -Werror -std=c99 -O0
-CPPFLAGS = -DPROJECT1 -DVERBOSE
-LDFLAGS = -lm -Wl,-Map,project1.map
+CPPFLAGS = -DPROJECT2 -DVERBOSE
+LDFLAGS = -lm -Wl,-Map,project2.map
 CFLAGS = -c
 LFLAGS = -S
 
@@ -47,10 +48,10 @@ compile-all: $(OBJS)
 
 .PHONY: build
 build: $(OBJS)
-	$(CC) $(DEBUG) $(OBJS) $(PLATFORM_FLAGS) $(LDFLAGS) -o project1.elf
-	size project1.elf $(OBJS)
+	$(CC) $(DEBUG) $(OBJS) $(PLATFORM_FLAGS) $(LDFLAGS) -o project2.elf
+	size project2.elf $(OBJS)
 
 
 .PHONY: clean
 clean:
-	-rm *.i *.o *.map *.d project1.elf
+	-rm *.i *.o *.map *.d project2.elf

@@ -14,8 +14,20 @@
 
 CB_status CB_buffer_add_item(CB_t * buff, uint32_t data){
 
-  
-  return 0;
+  if(buff.bufflength == (buff.count-1))      //checks to see if the buffer is full, if yes then return
+  {
+    return buffer_full;
+  }
+
+  if(buff->headptr)==(buff->circbuff+buff.buffLength))  //check to see if at end of buffer
+  {
+    buff->headptr = buff->circbuff;  //resets headptr / write back to beginning
+  }
+
+*buff->headptr = data;      //writes data to location of headptr
+buff->headptr++;         //increments headptr for next write
+
+  return no_error;
 };
 
 CB_status CB_buffer_remove_item(CB_t * buff, uint32_t removedData);
