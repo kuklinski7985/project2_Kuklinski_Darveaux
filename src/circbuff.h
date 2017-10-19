@@ -14,11 +14,11 @@
 
 /*struct and emun are used to interact with and control the circular buffer*/
 typedef struct {
-  uint32_t * circbuff;           //allocated memory for the buffer elements
-  uint32_t * headptr;            //pointer to head or newest item
-  uint32_t * tailptr;            //pointer to the tail or oldest item
-  uint32_t buffLength;         //number of items allocated to the buffer
-  uint32_t count;              //current item count in the buffer
+  uint8_t * circbuff;           //allocated memory for the buffer elements
+  uint8_t * headptr;            //pointer to head or newest item
+  uint8_t * tailptr;            //pointer to the tail or oldest item
+  uint8_t buffLength;         //number of items allocated to the buffer
+  uint8_t count;              //current item count in the buffer
 }CB_t;
 
 

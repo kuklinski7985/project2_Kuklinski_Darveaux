@@ -1,5 +1,5 @@
 #SOURCES = conversion.c debug.c memory.c main.c project2.c circbuff.c uart.c
-SOURCES = main.c project2.c circbuff.c uart.c
+SOURCES = main.c project2.c circbuff.c uart.c debug.c
 OBJS = $(SOURCES:.c=.o)
 IMP = $(SOURCES:.c=.i)
 INCLUDES = 
