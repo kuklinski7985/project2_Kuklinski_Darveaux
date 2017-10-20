@@ -19,6 +19,7 @@ typedef struct {
   uint8_t * tailptr;            //pointer to the tail or oldest item
   uint8_t buffLength;         //number of items allocated to the buffer
   uint8_t count;              //current item count in the buffer
+  uint8_t * poppedData;         //place to store data removed from buffer
 }CB_t;
 
 
@@ -48,7 +49,7 @@ CB_status CB_buffer_add_item(CB_t * buff, uint32_t data);
  *@return enumeration that specifies the success/failure/ect of the fxn call
 
  */
-CB_status CB_buffer_remove_item(CB_t * buff, uint32_t removedData);
+CB_status CB_buffer_remove_item(CB_t * buff, uint8_t * removedData);
 
 
 /**
