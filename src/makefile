@@ -1,5 +1,6 @@
-#SOURCES = conversion.c debug.c memory.c main.c project2.c circbuff.c uart.c
+
 SOURCES = main.c project2.c circbuff.c uart.c debug.c
+CMOCKAS = unittest.c
 OBJS = $(SOURCES:.c=.o)
 IMP = $(SOURCES:.c=.i)
 INCLUDES = 
@@ -12,7 +13,7 @@ LFLAGS = -S
 
 ifeq ($(PLATFORM),HOST)
 	CC = gcc
-	 
+
 endif
 
 ifeq ($(PLATFORM),BBB)
@@ -51,7 +52,10 @@ build: $(OBJS)
 	$(CC) $(DEBUG) $(OBJS) $(PLATFORM_FLAGS) $(LDFLAGS) -o project2.elf
 	size project2.elf $(OBJS)
 
+.PHONY: unittest
+unittest: $(MOCKS)
+	$(CC) $(CMOCKAS) -I -WI, -lcmocka -o $@
 
 .PHONY: clean
 clean:
-	-rm *.i *.o *.map *.d project2.elf
+	-rm *.i *.o *.map *.d project2.elf unittest *.out
