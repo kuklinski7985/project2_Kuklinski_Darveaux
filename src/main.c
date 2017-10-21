@@ -15,36 +15,39 @@ int main(){
  #endif*/
 
  CB_t userbuff;
- uint8_t size = 8;
+ uint8_t size = 16;
 CB_status status = 0;
 status = CB_init(&userbuff,size);
 printf("initialize status: %d\n\n",status);
 
- for(uint8_t y=1; y<4; y++)
+ for(uint8_t y=1; y<=12; y++)
  {
    status = CB_buffer_add_item(&userbuff,y);
    printf("add status: %d\n", status);
+   printf("count: %d\n", userbuff.count);
  }
 
-  for(uint8_t x=1; x<2; x++)
+  for(uint8_t x=0; x<=7; x++)
  {
    status = CB_buffer_remove_item(&userbuff,userbuff.poppedData);
    printf("remove status: %d  |  removed data: %0x \n", status, *userbuff.poppedData);
+   printf("count: %d\n", userbuff.count);
  }
  
-  
-   for(uint8_t y=1; y<5; y++)
+
+   for(uint8_t y=1; y<=13; y++)
  {
    status = CB_buffer_add_item(&userbuff,y);
    printf("add status: %d\n", status);
+      printf("count: %d\n", userbuff.count);
  }
-
+   /*
 
   for(uint8_t x=1; x<5; x++)
  {
    status = CB_buffer_remove_item(&userbuff,userbuff.poppedData);
    printf("remove status: %d  |  removed data: %0x \n", status, *userbuff.poppedData);
- }
+   }*/
   
    
  printf("\nBuffer Contents\n");
