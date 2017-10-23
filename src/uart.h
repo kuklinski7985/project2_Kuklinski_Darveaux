@@ -34,7 +34,7 @@ void UART_configure();
  *
  *@return VOID
  */
-void UART_send(uint32_t * data);
+void UART_send(uint8_t * data);
 
 
 /**
@@ -45,7 +45,7 @@ void UART_send(uint32_t * data);
  *
  *@return VOID
  */
-void UART_send_n(uint32_t * data, uint32_t length);
+void UART_send_n(uint8_t * data, uint16_t length);
 
 
 /**
@@ -55,7 +55,7 @@ void UART_send_n(uint32_t * data, uint32_t length);
  *
  *@return byte of data that was sent
  */
-uint32_t UART_receive(uint32_t * inputData);
+uint8_t UART_receive(uint8_t * data);
 
 
 /**
@@ -66,7 +66,7 @@ uint32_t UART_receive(uint32_t * inputData);
  *
  *@return
  */
-uint32_t UART_receive_n(uint32_t * data, uint32_t length);
+uint8_t * UART_receive_n(uint8_t * data, uint16_t length);
 
 
 /**
