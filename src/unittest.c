@@ -200,6 +200,10 @@ static void littleToBigTestValid(void** state)
   assert_true(big_to_little32(testsrc,1) == 0);
 }
 
+statuc void bufferAllocateFree(void** state)
+{
+}
+
 
 int main(void)
 {
@@ -220,6 +224,7 @@ int main(void)
       cmocka_unit_test(bigToLittleTestValid),
       cmocka_unit_test(littleToBigTestVoid),
       cmocka_unit_test(littleToBigTestValid),
+      cmocka_unit_test(bufferAllocateFree),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
