@@ -14,6 +14,12 @@
 
 int8_t * my_memset(uint8_t * src, size_t length, uint8_t value)
 {
+
+  //checking for invalid NULL pointers
+  if(src == NULL)
+    {
+      return (void*)NULL;
+    }
   //sets a number of bytes (defined by length) in memory equal to value, starting
   //the src address 
   for(int i=0; i<length; i++)
@@ -28,6 +34,11 @@ int8_t * my_memset(uint8_t * src, size_t length, uint8_t value)
 
 uint8_t * my_memzero(uint8_t * src, size_t length)
 {
+  //checking for invalid NULL pointers
+  if(src == NULL)
+    {
+      return (void*)NULL;
+    }
   //sets a number of bytes (defined by length) in memory equal to zero, starting
   //at the src address 
   for(int i=0; i<length; i++)
@@ -42,10 +53,12 @@ uint8_t * my_memzero(uint8_t * src, size_t length)
 
 uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length)
 {
+  //checking for invalid NULL pointers
   if(src == NULL || dst == NULL)
     {
       return (void*)NULL;
     }
+
   //defines an array to hold the src data in order to prevent corruption
   uint8_t holdArray[length];
   uint8_t *holdArrayPtr = holdArray;
@@ -68,7 +81,7 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length)
     dst++;
     holdArrayPtr++;
   }
-  
+
   //returns destination pointer to original value
   return ((uint8_t*) dst-length);
 }
@@ -92,6 +105,10 @@ uint8_t * my_memcpy(uint8_t * src, uint8_t * dst, size_t length)
 uint8_t * my_reverse(uint8_t * src, size_t length)
 {
 
+  if(src == NULL)
+  {
+    return (void*)NULL;
+  }
   //defines pointers to the beginning and end of array of data
   uint8_t *ptrHead = src;    
   uint8_t *ptrTail = src + (length-1); 

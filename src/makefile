@@ -54,7 +54,7 @@ build: $(OBJS)
 
 .PHONY: unittest
 unittest: $(MOCKS)
-	$(CC) $(CMOCKAS) -I -WI, -lcmocka -o $@
+	$(CC) $(CMOCKAS) -I -WI, -lcmocka -o $@ -lm
 
 .PHONY: clean
 clean:
