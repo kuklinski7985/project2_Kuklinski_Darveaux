@@ -12,7 +12,7 @@
 #include "circbuff.h"
 
 
-CB_status CB_buffer_add_item(CB_t * buff, uint32_t data)
+CB_status CB_buffer_add_item(CB_t * buff, uint8_t data)
 {
   if(CB_is_full(buff) == buffer_full)  //checks to see if buffer is full
   {
@@ -95,16 +95,17 @@ CB_status CB_peek(CB_t * buff, uint32_t positionFromHead, uint8_t *readValue)
   
   if(((buff->headptr)+positionFromHead) >= ((buff->circbuff) + (buff->buffLength)))
     {
-      dist2End = (buff->buffLength) - ((buff->circbuff+buff->buffLength)-(buff->headptr));
-      printf("dist2end: %d\n\n",dist2End);
-      newPos = positionFromHead - dist2End;
+      dist2End = (buff->buffLength) - (((buff->circbuff)+(buff->buffLength))-(buff->headptr))+1;
+      //printf("dist2end: %d\n\n",dist2End);
+      newPos = positionFromHead - dist2End - 1;
+      //printf("newPos: %d\n",newPos);
       *readValue = *((buff->circbuff) + newPos);
-      printf("readValue Add: %p\n",readValue);
+      //printf("readValue Add: %p\n",((buff->circbuff) + newPos));
     }
     else
     {
       *readValue = *((buff->headptr) + positionFromHead);
-      printf("readValue Add: %p\n",readValue);
+      //printf("readValue Add: %p\n",readValue);
     }
   return no_error;
 }

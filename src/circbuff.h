@@ -37,7 +37,7 @@ typedef enum {
  *@return enumeration that specifies the success/failure/ect of the fxn call
 
  */
-CB_status CB_buffer_add_item(CB_t * buff, uint32_t data);
+CB_status CB_buffer_add_item(CB_t * buff, uint8_t data);
 
 
 /**

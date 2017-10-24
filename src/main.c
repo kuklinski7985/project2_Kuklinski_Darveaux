@@ -16,11 +16,18 @@ int main(){
 
  CB_t userbuff;
  uint8_t size = 16;
-CB_status status = 0;
-status = CB_init(&userbuff,size);
-printf("initialize status: %d\n\n",status);
+ CB_status status = 0;
+ status = CB_init(&userbuff,size);
+ printf("initialize status: %d\n",status);
+ 
+ uint8_t data = 'a';
+ status = CB_buffer_add_item(&userbuff,data);
+ printf("add status: %d\n", status);
+ printf("count: %d\n", userbuff.count);
 
- for(uint8_t y=1; y<=12; y++)
+
+ 
+/* for(uint8_t y=1; y<=12; y++)
  {
    status = CB_buffer_add_item(&userbuff,y);
    printf("add status: %d\n", status);
@@ -41,20 +48,14 @@ printf("initialize status: %d\n\n",status);
    printf("add status: %d\n", status);
       printf("count: %d\n", userbuff.count);
  }
-   /*
-
-  for(uint8_t x=1; x<5; x++)
- {
-   status = CB_buffer_remove_item(&userbuff,userbuff.poppedData);
-   printf("remove status: %d  |  removed data: %0x \n", status, *userbuff.poppedData);
-   }*/
+*/
   
    
  printf("\nBuffer Contents\n");
 
  print_memory(userbuff.circbuff, size);
 
- CB_peek(&userbuff,6,userbuff.poppedData);
+ CB_peek(&userbuff,1,userbuff.poppedData);
  printf("peeked data: %0x\n",*userbuff.poppedData);
  
  printf("headptr address: %p \n",userbuff.headptr);

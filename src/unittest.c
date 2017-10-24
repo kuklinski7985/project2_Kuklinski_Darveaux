@@ -6,6 +6,7 @@
 #include "memory.c"
 #include "conversion.c"
 #include "circbuff.c"
+#include "debug.c"
 
 #include <setjmp.h>
 #include <cmocka.h>
@@ -228,11 +229,86 @@ static void bufferTestAddRemove(void** state)
 {
   CB_t userbuff;
   CB_init(&userbuff, 16);
-  uint32_t data = 0xAB12CD34;
-  CB_status status = CB_buffer_add_item(&userbuff, data);
+  uint32_t data = 0;
+  CB_status status;
+  uint8_t writeComp = 0;
+  uint8_t readComp = 0;
   
+  
+  for(uint8_t i=0; i < userbuff.buffLength; i++)
+    {
+      CB_buffer_add_item(&userbuff, (60+i));
+      CB_peek(&userbuff,i,userbuff.poppedData);
+      writeComp = *(userbuff.poppedData);
+      CB_buffer_remove_item(&userbuff,userbuff.poppedData);
+      CB_peek(&userbuff,i,userbuff.poppedData);
+      readComp = *(userbuff.poppedData);
+      if(writeComp != readComp)
+	{
+	  assert_false(writeComp == readComp);
+	}
+    }
+  assert_true(writeComp == readComp);
 }
 
+static void bufferTestFull(void** state)
+{
+  CB_t userbuff;
+  CB_init(&userbuff,16);
+  CB_status status = 0;
+  for(uint8_t i=0; i<= 17; i++)
+    {
+      status = CB_buffer_add_item(&userbuff,i);
+    }
+  assert_true(status == buffer_full);
+}
+
+static void bufferTestEmpty(void** state)
+{
+  CB_t userbuff;
+  CB_init(&userbuff,16);
+  CB_status status = CB_buffer_remove_item(&userbuff,0);
+  assert_true(status == buffer_empty);
+}
+
+static void bufferTestWrapAroundADD(void** state)
+{
+  CB_t userbuff;
+  CB_init(&userbuff,16);
+  CB_status status = 0;
+  uint8_t testLength = 9;
+  userbuff.headptr = userbuff.circbuff + 9;  //setting headptr far enough away from source to wrpa around and not fill buffer
+  for(uint8_t i=0; i<= testLength; i++)
+    {
+      status = CB_buffer_add_item(&userbuff,i);
+    }
+
+  assert_true(status == no_error);
+}
+
+static void bufferTestWrapAroundREMOVE(void** state)
+{
+  CB_t userbuff;
+  CB_init(&userbuff,16);
+  CB_status status = 0;
+  uint8_t testLength = 9;
+
+
+  for(uint8_t x=0;x<=1;x++)
+    {
+      for(uint8_t i=0;i<=testLength;i++)
+      {
+        CB_buffer_add_item(&userbuff,i);
+      }
+
+      for(uint8_t j=0;j<=testLength;j++)
+      {
+        status = CB_buffer_remove_item(&userbuff, userbuff.poppedData);
+      }
+    }
+
+  assert_true(status == no_error);
+}
 
 int main(void)
 {
@@ -257,6 +333,10 @@ int main(void)
       cmocka_unit_test(bufferPtrTestValid),
       cmocka_unit_test(bufferNonInitTest),
       cmocka_unit_test(bufferTestAddRemove),
+      cmocka_unit_test(bufferTestFull),
+      cmocka_unit_test(bufferTestEmpty),
+      cmocka_unit_test(bufferTestWrapAroundADD),
+      cmocka_unit_test(bufferTestWrapAroundREMOVE),
 
       };
 
