@@ -23,8 +23,6 @@ CB_status CB_buffer_add_item(CB_t * buff, uint32_t data)
     *buff->headptr = data;
     buff->count++;
   }
-  //*buff->headptr = data;
-  //buff->count++;
 
   /*checks coniditions for wrap around, if true then sets back to start
   * else increases headptr to next location*/
@@ -40,8 +38,6 @@ CB_status CB_buffer_add_item(CB_t * buff, uint32_t data)
   
   return no_error;
 }
-
-
 
 CB_status CB_buffer_remove_item(CB_t * buff, uint8_t * removedData)
 {
@@ -92,14 +88,39 @@ CB_status CB_is_empty(CB_t * buff)
     }
 }
 
-CB_status CB_peek(CB_t * buff, uint32_t buffValue);
+CB_status CB_peek(CB_t * buff, uint32_t positionFromHead, uint8_t *readValue)
+{
+  uint32_t dist2End = 0;
+  uint32_t newPos = 0;
+  
+  if(((buff->headptr)+positionFromHead) >= ((buff->circbuff) + (buff->buffLength)))
+    {
+      dist2End = (buff->buffLength) - ((buff->circbuff+buff->buffLength)-(buff->headptr));
+      printf("dist2end: %d\n\n",dist2End);
+      newPos = positionFromHead - dist2End;
+      *readValue = *((buff->circbuff) + newPos);
+      printf("readValue Add: %p\n",readValue);
+    }
+    else
+    {
+      *readValue = *((buff->headptr) + positionFromHead);
+      printf("readValue Add: %p\n",readValue);
+    }
+  return no_error;
+}
 
 CB_status CB_init(CB_t * buff, uint32_t length){
 
+
+  if (buff == NULL)
+    {
+      return null_error;
+    }
+  
   buff->circbuff  = (uint8_t*)malloc((sizeof(size_t))*length);
 
   
-  if (buff->headptr == NULL)
+  if ((buff->headptr) == NULL)
   {
     return null_error;
   }

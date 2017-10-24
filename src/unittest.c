@@ -5,6 +5,7 @@
 #include <stddef.h>
 #include "memory.c"
 #include "conversion.c"
+#include "circbuff.c"
 
 #include <setjmp.h>
 #include <cmocka.h>
@@ -36,7 +37,7 @@ static void memmoveTestWithOverlap(void** state)
   assert_true(my_memmove(testsrc, testdst, 8) != NULL);
 }
 
-static void memsetTestVoid(void** state)
+void memsetTestVoid(void** state)
 {
   uint8_t * testsrc;
   uint8_t testptrsrc;
@@ -200,8 +201,36 @@ static void littleToBigTestValid(void** state)
   assert_true(big_to_little32(testsrc,1) == 0);
 }
 
-statuc void bufferAllocateFree(void** state)
+
+/*************Circular Buffer Test Functions************/
+static void bufferAllocateTest(void** state)
 {
+  CB_t userbuff;
+  uint8_t length = 16;
+  assert_true(CB_init(&userbuff,length) == no_error);
+}
+
+static void bufferPtrTestValid(void** state)
+{
+  CB_t userbuff;
+  uint8_t length = 16;
+  assert_true(CB_init(NULL,length) != null_error);
+}
+
+static void bufferNonInitTest(void** state)
+{
+  CB_t userbuff;
+  uint8_t length = 16;
+  assert_true(CB_init(&userbuff,length) == no_error);
+}
+
+static void bufferTestAddRemove(void** state)
+{
+  CB_t userbuff;
+  CB_init(&userbuff, 16);
+  uint32_t data = 0xAB12CD34;
+  CB_status status = CB_buffer_add_item(&userbuff, data);
+  
 }
 
 
@@ -224,8 +253,12 @@ int main(void)
       cmocka_unit_test(bigToLittleTestValid),
       cmocka_unit_test(littleToBigTestVoid),
       cmocka_unit_test(littleToBigTestValid),
-      cmocka_unit_test(bufferAllocateFree),
-    };
+      cmocka_unit_test(bufferAllocateTest),
+      cmocka_unit_test(bufferPtrTestValid),
+      cmocka_unit_test(bufferNonInitTest),
+      cmocka_unit_test(bufferTestAddRemove),
+
+      };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
 }

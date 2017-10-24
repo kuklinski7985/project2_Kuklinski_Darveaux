@@ -1,5 +1,5 @@
 
-SOURCES = main.c project2.c circbuff.c uart.c debug.c
+SOURCES = main.c project2.c circbuff.c debug.c
 CMOCKAS = unittest.c
 OBJS = $(SOURCES:.c=.o)
 IMP = $(SOURCES:.c=.i)

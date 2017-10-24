@@ -53,6 +53,10 @@ printf("initialize status: %d\n\n",status);
  printf("\nBuffer Contents\n");
 
  print_memory(userbuff.circbuff, size);
+
+ CB_peek(&userbuff,6,userbuff.poppedData);
+ printf("peeked data: %0x\n",*userbuff.poppedData);
+ 
  printf("headptr address: %p \n",userbuff.headptr);
  printf("tailptr address: %p \n",userbuff.tailptr);
   return 0;

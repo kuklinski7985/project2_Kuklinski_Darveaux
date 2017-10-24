@@ -83,8 +83,7 @@ CB_status CB_is_empty(CB_t * buff);
  *@return value of the position given in the buffer
 
  */
-CB_status CB_peek(CB_t * buff, uint32_t buffValue);
-
+CB_status CB_peek(CB_t * buff, uint32_t positionFromHead, uint8_t *readValue);
 /**
  *@brief initializes a buffer
  *
