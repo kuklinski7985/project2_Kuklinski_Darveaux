@@ -17,6 +17,10 @@
 
 int8_t little_to_big32(uint32_t * data, uint32_t length)
 {
+    if(data == NULL)
+    {
+      return 1;
+    }
   //masks out each indivual byte of data into variables
   uint32_t original1 = *data & 0x000000ff;
   uint32_t original2 = *data & 0x0000ff00;
@@ -47,6 +51,11 @@ int8_t little_to_big32(uint32_t * data, uint32_t length)
 
 int8_t big_to_little32(uint32_t * data, uint32_t length)
 {
+
+  if(data == NULL)
+    {
+      return 1;
+    }
   //masks out each indivual byte of data into variables
   uint32_t original1 = *data & 0xff000000;
   uint32_t original2 = *data & 0x00ff0000;
