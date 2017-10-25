@@ -27,14 +27,14 @@ int main(){
 
 
  
-/* for(uint8_t y=1; y<=12; y++)
+for(uint8_t y=1; y<=12; y++)
  {
    status = CB_buffer_add_item(&userbuff,y);
    printf("add status: %d\n", status);
    printf("count: %d\n", userbuff.count);
  }
 
-  for(uint8_t x=0; x<=7; x++)
+  for(uint8_t x=0; x<=15; x++)
  {
    status = CB_buffer_remove_item(&userbuff,userbuff.poppedData);
    printf("remove status: %d  |  removed data: %0x \n", status, *userbuff.poppedData);
@@ -48,7 +48,7 @@ int main(){
    printf("add status: %d\n", status);
       printf("count: %d\n", userbuff.count);
  }
-*/
+
   
    
  printf("\nBuffer Contents\n");
