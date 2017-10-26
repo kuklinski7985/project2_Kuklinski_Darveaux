@@ -18,5 +18,8 @@
 
 void project2(void){
 
+  printf("%c",getc(stdin));
+  return;
+  
 
 }
