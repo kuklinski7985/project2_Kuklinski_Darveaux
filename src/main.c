@@ -3,17 +3,24 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "circbuff.h"
-#include "uart.h"
+//#include "uart.h"
 #include "debug.h"
 
 
 
 int main()
 {
+
+
+
+
+
+
+/*
  	uint8_t txdata = 0xF0;
 	//uint8_t rxdata = 0;
-	uint8_t* tx_address = &txdata;
-	//uint8_t*rx_address = &rxdata;
+	uint8_t * tx_address = &txdata;
+	//uint8_t * rx_address = &rxdata;
 	uint32_t i;
 
 	for (;;)
@@ -27,13 +34,14 @@ int main()
 
 
 	}
+*/
 
 
 
 
-  /*#ifdef PROJECT2
+  #ifdef PROJECT2
  project2();
- #endif*/
+ #endif
 
 /*
  CB_t userbuff;
