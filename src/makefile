@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-SOURCES = main.c project2.c circbuff.c debug.c #uart.c 
-=======
-<<<<<<< HEAD
 
-SOURCES = main.c project2.c circbuff.c debug.c
-=======
-SOURCES = main.c project2.c circbuff.c uart.c debug.c
->>>>>>> 46b0a16c1c1ddfcee7fa14ca91cb157a6fd71804
->>>>>>> ac10fa0791b891a2f44bdddfb84b9d74b6e6b33c
+SOURCES = main.c project2.c circbuff.c debug.c #uart.c 
+
 CMOCKAS = unittest.c
 OBJS = $(SOURCES:.c=.o)
 IMP = $(SOURCES:.c=.i)
