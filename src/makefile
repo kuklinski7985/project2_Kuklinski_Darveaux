@@ -1,4 +1,5 @@
-SOURCES = main.c project2.c circbuff.c debug.c #uart.c
+SOURCES = main.c project2.c circbuff.c debug.c #uart.c 
+
 CMOCKAS = unittest.c
 OBJS = $(SOURCES:.c=.o)
 IMP = $(SOURCES:.c=.i)
@@ -8,8 +9,6 @@ CPPFLAGS = -DPROJECT2 -DVERBOSE
 LDFLAGS = -lm -Wl,-Map,project2.map
 CFLAGS = -c
 LFLAGS = -S
-
-
 
 ifeq ($(PLATFORM),HOST)
 	CC = gcc
@@ -35,6 +34,11 @@ endif
 %.o:%.c
 	$(CC) $(DEBUG) $(CPPFLAGS) $(CFLAGS) -MMD $^ -o $@
 
+endif
+
+%.o:%.c
+	$(CC) $(DEBUG) $(CPPFLAGS) $(CFLAGS)  -MMD $^ -o $@
+
 
 %.i:%.c
 	$(CC) $(DEBUG) -E $(CPPFLAGS) $^ -o $@
@@ -50,7 +54,7 @@ compile-all: $(OBJS)
 
 .PHONY: build
 build: $(OBJS)
-	$(CC) $(DEBUG) $(OBJS) $(PLATFORM_FLAGS)  $(LDFLAGS) -o project2.elf
+	$(CC) $(DEBUG) $(OBJS) $(PLATFORM_FLAGS) $(LDFLAGS) -o project2.elf
 	size project2.elf $(OBJS)
 
 .PHONY: unittest
