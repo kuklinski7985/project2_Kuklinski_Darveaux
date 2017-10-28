@@ -36,7 +36,7 @@ static void memmoveTestVoid(void** state)
   uint8_t testptrsrc, testptrdst;
   testdst = NULL;
   testsrc = NULL;
-  assert_true(my_memmove(testsrc, testdst, 8) != NULL);
+  assert_true(my_memmove(testsrc, testdst, 8) == NULL);
 }
 
 /**
@@ -77,7 +77,7 @@ void memsetTestVoid(void** state)
   uint8_t * testsrc;
   uint8_t testptrsrc;
   testsrc = NULL;
-  assert_true(my_memset(testsrc,8,3) != NULL);
+  assert_true(my_memset(testsrc,8,3) == NULL);
 }
 
 /**
@@ -117,7 +117,7 @@ static void memZeroTestVoid(void** state)
   uint8_t * testsrc;
   uint8_t testptrsrc;
   testsrc = NULL;
-  assert_true(my_memzero(testsrc,8) != NULL);
+  assert_true(my_memzero(testsrc,8) == NULL);
 }
 
 /**
@@ -157,7 +157,7 @@ static void reverseTestVoid(void** state)
   uint8_t * testsrc;
   uint8_t testptrsrc;
   testsrc = NULL;
-  assert_true(my_reverse(testsrc,8) != NULL);
+  assert_true(my_reverse(testsrc,8) == NULL);
 }
 
 /**
@@ -262,7 +262,7 @@ static void bigToLittleTestVoid(void** state)
   uint32_t * testsrc;
   uint32_t testptrsrc;
   testsrc = NULL;
-  assert_true(big_to_little32(testsrc,1) != 1);
+  assert_true(big_to_little32(testsrc,1) == 1);
 }
 
 /**
@@ -290,7 +290,7 @@ static void littleToBigTestVoid(void** state)
   uint32_t * testsrc;
   uint32_t testptrsrc;
   testsrc = NULL;
-  assert_true(big_to_little32(testsrc,1) != 1);
+  assert_true(big_to_little32(testsrc,1) == 1);
 }
 
 /**
@@ -323,6 +323,7 @@ static void bufferAllocateTest(void** state)
   CB_t userbuff;
   uint8_t length = 16;
   assert_true(CB_init(&userbuff,length) == no_error);
+  
 }
 
 /**
@@ -335,7 +336,7 @@ static void bufferPtrTestValid(void** state)
 {
   CB_t userbuff;
   uint8_t length = 16;
-  assert_true(CB_init(NULL,length) != null_error);
+  assert_true(CB_init(NULL,length) == null_error);
 }
 
 /**
@@ -504,7 +505,7 @@ static void bufferTestOverFill(void** state)
       status = CB_buffer_add_item(&userbuff,y);
       if (status == buffer_full)
 	{
-	  assert_false(status == buffer_full);
+	  assert_true(status == buffer_full);
 	}
     }
 }
@@ -521,7 +522,7 @@ static void bufferTestOverEmpty(void** state)
   CB_status status = 0;
 
   status = CB_buffer_remove_item(&userbuff, userbuff.poppedData);
-  assert_false(status == buffer_empty);
+  assert_true(status == buffer_empty);
   
 }
 

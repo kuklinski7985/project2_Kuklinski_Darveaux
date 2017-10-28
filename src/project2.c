@@ -25,30 +25,53 @@ uint8_t error_count=0;
 void project2(void)
 {
 
+  CB_t * userbuff;
+  userbuff = (CB_t*)malloc(sizeof(CB_t));
+  uint8_t size = 16;               //sets circular buffer size
+  CB_status status = 0;
+  status = CB_init(userbuff,size);
+
+  printf("status: %d\n",status);
+  UART_configure();                //configures the UART
 
 
 
+  if((userbuff.count == size) || poppedData == '?')    //buffer full or ? received
+    {
+      
+
+
+
+  free(userbuff->circbuff);             //frees circular buffer 
+  CB_destroy(userbuff);                  //frees buffer struct
 }
-
+/*
 void process_Data(uint8_t data)
 {
 
-	if(65<=data<=90 || 97<=data<=122) 	//check if data is an alphabetical character in ASCII
-	Alpha_count++;
+  if((data>=65 && data<=90) || (data>=97 && data<=122))        //check if data is an alphabetical character in ASCII
+    {
+      Alpha_count++;
+    }
+  else if(data>=48 && data<=57)			//check if data is a number in ASCII
+    {
+      Num_count++;
+    }
+  else if((data>=32 && data<=47) || (data>=58 && data<=64) || (data>=91 && data<=96) || (data>=123 && data<=126))
+    // check if data is punctuation in ASCII
+    {
+      Punct_count=0;
+    }
+  else if((data>=0 && data<=31) || data==127)
+    {
+      Misc_count++;
+    }
+  else
+    {
+      error_count++;
+    }
 
-	else if(48<=data<=57)			//check if data is a number in ASCII
-	Num_count++;
-
-	else if(32<=data<=47 || 58<=data<=64 || 91<=data<=96 || 123<=data<=126) // check if data is punctuation in ASCII
-	Punct_count=0;
-
-	else if(0<=data<=31 || data==127)
-	Misc_count++;
-	
-	else
-	error_count++;
-
-  printf("%c",getc(stdin));
+  //printf("%c",getc(stdin));
   return;
   
 
@@ -61,9 +84,9 @@ void transmit_table()
 	uint8_t Num[] = "# of Numeric Characters:  ";
 	uint16_t Num_Length = 26;
 	uint8_t Punct[] = "# of Punctuation Characters:  ";
-	uint16_t Punct_length = 29;
+	uint16_t Punct_Length = 29;
 	uint8_t Misc[] = "# of Miscellaneous Characters:  ";
-	uint16_t Misc_length = 32;
+	uint16_t Misc_Length = 32;
 
 	UART_send_n(Alpha, Alpha_Length);
 
@@ -75,7 +98,7 @@ void transmit_table()
 	UART_send(&Num_count);
 
 	
-	UART_send_n(Punct, punct_Length);
+	UART_send_n(Punct, Punct_Length);
 
 	UART_send(&Punct_count);
 
@@ -85,6 +108,7 @@ void transmit_table()
 	UART_send(&Misc_count);
 
 }
+*/
 
 
 

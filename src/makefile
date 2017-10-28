@@ -34,8 +34,6 @@ endif
 %.o:%.c
 	$(CC) $(DEBUG) $(CPPFLAGS) $(CFLAGS) -MMD $^ -o $@
 
-endif
-
 %.o:%.c
 	$(CC) $(DEBUG) $(CPPFLAGS) $(CFLAGS)  -MMD $^ -o $@
 

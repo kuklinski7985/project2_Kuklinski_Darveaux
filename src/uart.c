@@ -15,8 +15,8 @@
 void UART_configure()
 {
 
-uint8_t bdh; //used to set SBR bits in the BDH register
-uint8_t bdl; // used to set SBR bits in the BDL register
+uint8_t bdh; //used to set SBR bits in the BDH register, BAUD rate register High
+uint8_t bdl; // used to set SBR bits in the BDL register, BAUD rate register low
 
 uint16_t sbr_mask = 0;  // variable used to set the SBR field in the UART baud rate register in order to 
 			// configure the baud rate
@@ -151,9 +151,6 @@ void UART_send_n(uint8_t * data, uint16_t length)
 	}
 
 	data -= length;  //reset the the data pointer to its original value
-
-
-
 }
 
 
@@ -230,7 +227,7 @@ uint8_t * UART_receive_n(uint8_t * data, uint16_t length)
 
 void UART0_IRQHandler()
 {
-/*
+
 	uint8_t tx_packet = 0xF0;  //packet to transmit on if TDRE flag is set
 	uint8_t rx_packet = 0;	   //variable to store received packet if RDRF flag is set
 	if(UART0_S1 & UART_S1_RDRF_MASK) 
@@ -241,8 +238,6 @@ void UART0_IRQHandler()
 	if(UART0_S1 & UART_S1_TDRE_MASK)
 	{
 		UART0_D = tx_packet;  //transmit dummy packet when TDRE flag is set
-
 	}
-*/	
 
 }
