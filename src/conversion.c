@@ -83,7 +83,7 @@ int8_t big_to_little32(uint32_t * data, uint32_t length)
     }
 }
 
-uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
+uint8_t* my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
 {
 	//creates variables to store the remainder of the modulo operation
 	//and keep track of the length of the ascii string generated
@@ -92,7 +92,13 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
 
 	//loop continues to divide the data by the base value and perform the 
 	//modulo operation using the base value until the data equals 0
-	while(data!=0)
+	if (data==0)
+		{
+			*ptr = 48;
+		}
+	else
+	{
+		while(data!=0)
 	{
 		rem =data%base;
 		data = data/base;
@@ -115,10 +121,12 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
 	//restores the ptr to its original value 
 	ptr = ptr-length;
 
-	//reverse the digits to be stored in the correct order
-	my_reverse(ptr, length); 
 
-	return length;
+	//reverse the digits to be stored in the correct order
+	my_reverse(ptr, length);
+	}
+
+	return ptr;
 }
 
 int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base)

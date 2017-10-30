@@ -14,8 +14,8 @@
 #define conversion_h_
 
 /*standard interger type to ASCII string  conversion.  Number to convert
-  is passed in as signed 32 bit interger and supports bases 2 to 16. USe the pointer provided to copy the new string to.  Returns length of the converted data*/
-uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base);
+  is passed in as signed 32 bit interger and supports bases 2 to 16. USe the pointer provided to copy the new string to.  Returns pointer to the converted data*/
+uint8_t* my_itoa(int32_t data, uint8_t * ptr, uint32_t base);
 
 /*Converts data from ASCII represented tring into an interger type.*/
 int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base);

@@ -1,6 +1,5 @@
 /*
 ** ###################################################################
-
 **     Processors:          MKL25Z128FM4
 **                          MKL25Z128FT4
 **                          MKL25Z128LH4
@@ -124,6 +123,7 @@ extern "C" {
 #define MCG_MODE_BLPE                  5U
 #define MCG_MODE_PBE                   6U
 #define MCG_MODE_PEE                   7U
+#define CLOCK_SETUP 1
 
 /* Predefined clock setups
    0 ... Default  part configuration
@@ -208,8 +208,8 @@ extern "C" {
   #define SYSTEM_MCG_C4_VALUE          0x00U               /* MCG_C4 */
   /* MCG_SC: ATME=0,ATMS=0,ATMF=0,FLTPRSRV=0,FCRDIV=0,LOCS0=0 */
   #define SYSTEM_MCG_SC_VALUE          0x00U               /* MCG_SC */
-/* MCG_C5: PLLCLKEN0=0,PLLSTEN0=0,PRDIV0=1 */
-  #define SYSTEM_MCG_C5_VALUE          0x01U               /* MCG_C5 */
+/* MCG_C5: PLLCLKEN0=1,PLLSTEN0=0,PRDIV0=1 */
+  #define SYSTEM_MCG_C5_VALUE          0x41U               /* MCG_C5 */  //Enable PLL CLock , bit 6
 /* MCG_C6: LOLIE0=0,PLLS=1,CME0=0,VDIV0=0 */
   #define SYSTEM_MCG_C6_VALUE          0x40U               /* MCG_C6 */
 /* OSC0_CR: ERCLKEN=1,EREFSTEN=0,SC2P=0,SC4P=0,SC8P=0,SC16P=0 */
@@ -220,8 +220,8 @@ extern "C" {
   #define SYSTEM_SIM_CLKDIV1_VALUE     0x10010000U         /* SIM_CLKDIV1 */
 /* SIM_SOPT1: USBREGEN=0,USBSSTBY=0,USBVSTBY=0,OSC32KSEL=3 */
   #define SYSTEM_SIM_SOPT1_VALUE       0x000C0000U         /* SIM_SOPT1 */
-/* SIM_SOPT2: UART0SRC=0,TPMSRC=1,USBSRC=0,PLLFLLSEL=1,CLKOUTSEL=0,RTCCLKOUTSEL=0 */
-  #define SYSTEM_SIM_SOPT2_VALUE       0x01010000U         /* SIM_SOPT2 */
+/* SIM_SOPT2: UART0SRC=01,TPMSRC=1,USBSRC=0,PLLFLLSEL=1,CLKOUTSEL=0,RTCCLKOUTSEL=0 */
+  #define SYSTEM_SIM_SOPT2_VALUE       0x04010000U         /* SIM_SOPT2 */ //set UART SOURCE to PLLCLK/2 bit 26
 #elif (CLOCK_SETUP == 2)
   #define DEFAULT_SYSTEM_CLOCK         4000000u            /* Default System clock value */
   #define MCG_MODE                     MCG_MODE_BLPI /* Clock generator mode */

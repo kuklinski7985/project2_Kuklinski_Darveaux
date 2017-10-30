@@ -117,8 +117,16 @@ uint8_t * my_reverse(uint8_t * src, size_t length)
   uint8_t intermediate = 0;     
 
 
+  if(ptrHead == (ptrTail-1))
+      {
+        intermediate = *ptrHead;
+        *ptrHead = *ptrTail;
+        *ptrTail = intermediate;
+      }
+
   //will continue to loop until head and tail pointers are equal, 
   //or they are adjacent
+
   while(!((ptrHead == ptrTail) || (ptrHead == (ptrTail -1))))
   {
     //swaps the bytes of the array

@@ -13,21 +13,15 @@
 #ifndef uart_h_
 #define uart_h_
 
-#define UART_C2_TE_MASK 0b0001000   	//bit 3
-#define UART_C2_RE_MASK 0b0000100  	//bit 2
 #define UART0_CLK_GATE_MASK 0x00000400	//bit 10
 #define UART1_CLK_GATE_MASK 0x00000800  //bit 11
 #define UART2_CLK_GATE_MASK 0x00001000  //bit 12
-#define UART_C2_RIE_MASK 0x20   	//bit 5
-#define UART_C2_TIE_MASK 0x80  		//bit 7
-#define UART_S1_TDRE_MASK 0x80          //bit 7
-#define UART_S1_RDRF_MASK 0x20		//bit 5
-#define BUSCLK 20971520u // default system clock is 20.971 MHz
+#define BUSCLK 48000000u // BUS_CLK
 #define BAUD 38400 // define UART baud rate here
 
-#define UART0
-//#define UART1
-//#define UART2
+#define U0
+//#define U1
+//#define U2
 
 
 
@@ -60,7 +54,7 @@ void UART_send(uint8_t * data);
  *
  *@return VOID
  */
-void UART_send_n(uint8_t * data, uint16_t length);
+void UART_send_n(uint8_t * data, uint8_t length);
 
 
 /**
@@ -70,7 +64,7 @@ void UART_send_n(uint8_t * data, uint16_t length);
  *
  *@return byte of data that was sent
  */
-uint8_t UART_receive(uint8_t * data);
+uint8_t UART_receive(uint8_t* data);
 
 
 /**
@@ -81,7 +75,7 @@ uint8_t UART_receive(uint8_t * data);
  *
  *@return
  */
-uint8_t * UART_receive_n(uint8_t * data, uint16_t length);
+uint8_t * UART_receive_n(uint8_t * data, uint8_t length);
 
 
 /**
@@ -91,7 +85,7 @@ uint8_t * UART_receive_n(uint8_t * data, uint16_t length);
  *
  *@return VOID
  */
-void UART0_IRQHandler();
+//void UART0_IRQHandler();
 
 
 #endif /*__uart_h__*/

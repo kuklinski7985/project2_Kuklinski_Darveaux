@@ -12,8 +12,6 @@
 #ifndef circularBuffer_h_
 #define circularBuffer_h_
 
-
-
 /*struct and emun are used to interact with and control the circular buffer*/
 typedef struct {
   uint8_t * circbuff;           //allocated memory for the buffer elements
@@ -24,7 +22,7 @@ typedef struct {
   uint8_t * poppedData;         //place to store data removed from buffer
 }CB_t;
 
-//provides error codes to buffer functions
+
 typedef enum {
   buffer_full, buffer_empty, no_error, null_error
 }CB_status;
@@ -86,6 +84,7 @@ CB_status CB_is_empty(CB_t * buff);
 
  */
 CB_status CB_peek(CB_t * buff, uint32_t positionFromHead, uint8_t *readValue);
+
 /**
  *@brief initializes a buffer
  *

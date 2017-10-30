@@ -23,11 +23,13 @@ CB_status CB_buffer_add_item(CB_t * buff, uint8_t data)
     *buff->headptr = data;
     buff->count++;
   }
+  //*buff->headptr = data;
+  //buff->count++;
 
   /*checks coniditions for wrap around, if true then sets back to start
   * else increases headptr to next location*/
   
-  if(((buff->headptr)+1) == ((buff->circbuff) + (buff->buffLength)))
+  if(((buff->headptr)) == ((buff->circbuff) + (buff->buffLength)))
   {
     buff->headptr = buff->circbuff;
   }
@@ -38,6 +40,8 @@ CB_status CB_buffer_add_item(CB_t * buff, uint8_t data)
   
   return no_error;
 }
+
+
 
 CB_status CB_buffer_remove_item(CB_t * buff, uint8_t * removedData)
 {
@@ -53,7 +57,7 @@ CB_status CB_buffer_remove_item(CB_t * buff, uint8_t * removedData)
     }
   
 
-  if(((buff->tailptr)+1) == ((buff->circbuff) + (buff->buffLength)))
+  if(((buff->tailptr)) == ((buff->circbuff) + (buff->buffLength)))
     {
       buff->tailptr = buff->circbuff;
     }
@@ -92,7 +96,7 @@ CB_status CB_peek(CB_t * buff, uint32_t positionFromHead, uint8_t *readValue)
 {
   uint32_t dist2End = 0;
   uint32_t newPos = 0;
-  
+
   if(((buff->headptr)+positionFromHead) >= ((buff->circbuff) + (buff->buffLength)))
     {
       dist2End = (buff->buffLength) - (((buff->circbuff)+(buff->buffLength))-(buff->headptr))+1;
@@ -112,16 +116,10 @@ CB_status CB_peek(CB_t * buff, uint32_t positionFromHead, uint8_t *readValue)
 
 CB_status CB_init(CB_t * buff, uint32_t length){
 
-
-  if (buff == NULL)
-    {
-      return null_error;
-    }
-  
   buff->circbuff  = (uint8_t*)malloc((sizeof(size_t))*length);
 
   
-  if ((buff->headptr) == NULL)
+  if (buff->headptr == NULL)
   {
     return null_error;
   }
